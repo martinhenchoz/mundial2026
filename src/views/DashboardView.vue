@@ -53,7 +53,7 @@ const todayStr = computed(() => new Intl.DateTimeFormat('es-AR', {
 
 const showCountdown = computed(() => {
   const m = store.firstMatch
-  return m?.status === 'SCHEDULED' && new Date(m.utcDate) > new Date()
+  return ['SCHEDULED','TIMED'].includes(m?.status) && new Date(m.utcDate) > new Date()
 })
 
 const { restart } = usePolling(

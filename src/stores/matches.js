@@ -11,7 +11,7 @@ export const useMatchesStore = defineStore('matches', {
     liveMatches: (s) => s.allMatches.filter(m => ['IN_PLAY','PAUSED'].includes(m.status)),
 
     upcomingMatches: (s) => s.allMatches
-      .filter(m => m.status === 'SCHEDULED' && new Date(m.utcDate) > new Date())
+      .filter(m => ['SCHEDULED','TIMED'].includes(m.status) && new Date(m.utcDate) > new Date())
       .sort((a, b) => new Date(a.utcDate) - new Date(b.utcDate)).slice(0, 6),
 
     matchesByGroup: (s) => {
@@ -43,7 +43,7 @@ export const useMatchesStore = defineStore('matches', {
       if (s.allMatches.some(m => ['IN_PLAY','PAUSED'].includes(m.status))) return 60_000
       const today = toArgDate(new Date())
       const hasToday = s.allMatches.some(m =>
-        m.status === 'SCHEDULED' && toArgDate(new Date(m.utcDate)) === today)
+        ['SCHEDULED','TIMED'].includes(m.status) && toArgDate(new Date(m.utcDate)) === today)
       return hasToday ? 5 * 60_000 : 30 * 60_000
     },
 
