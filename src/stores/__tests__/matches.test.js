@@ -43,4 +43,20 @@ describe('useMatchesStore', () => {
     store.allMatches = [m({ utcDate: '2025-01-01T21:00:00Z' })]
     expect(store.pollingInterval).toBe(30 * 60_000)
   })
+
+  it('firstMatch devuelve el partido con la utcDate más temprana', () => {
+    const store = useMatchesStore()
+    store.allMatches = [
+      m({ id: 2, utcDate: '2026-06-15T21:00:00Z' }),
+      m({ id: 1, utcDate: '2026-06-11T21:00:00Z' }),
+      m({ id: 3, utcDate: '2026-06-20T18:00:00Z' }),
+    ]
+    expect(store.firstMatch.id).toBe(1)
+  })
+
+  it('firstMatch devuelve null cuando no hay partidos', () => {
+    const store = useMatchesStore()
+    store.allMatches = []
+    expect(store.firstMatch).toBeNull()
+  })
 })

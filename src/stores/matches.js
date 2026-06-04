@@ -46,6 +46,10 @@ export const useMatchesStore = defineStore('matches', {
         m.status === 'SCHEDULED' && toArgDate(new Date(m.utcDate)) === today)
       return hasToday ? 5 * 60_000 : 30 * 60_000
     },
+
+    firstMatch: (s) => s.allMatches.length
+      ? [...s.allMatches].sort((a, b) => new Date(a.utcDate) - new Date(b.utcDate))[0]
+      : null,
   },
 
   actions: {
