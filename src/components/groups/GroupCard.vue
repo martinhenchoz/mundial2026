@@ -21,5 +21,5 @@ import StandingsTable from './StandingsTable.vue'
 import MatchScore from '../shared/MatchScore.vue'
 const props = defineProps({ group: { type: Object, required: true }, matches: { type: Array, default: () => [] } })
 const { formatMatchTime } = useArgTime()
-const groupName = computed(() => `Grupo ${props.group.group.replace('GROUP_', '')}`)
+const groupName = computed(() => props.group.group.replace(/^(GROUP_|Group )/i, 'Grupo '))
 </script>

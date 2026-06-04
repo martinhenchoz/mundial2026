@@ -3,7 +3,7 @@
     <span class="text-text-muted text-[10px] w-28 flex-shrink-0">{{ timeLabel }}</span>
     <div class="flex-1"><MatchScore :match="match" /></div>
     <span class="text-text-disabled text-[10px] w-14 text-right flex-shrink-0">
-      {{ match.group?.replace('GROUP_','Grupo ') ?? match.stage }}
+      {{ match.group?.replace(/^(GROUP_|Group )/i, 'Grupo ') ?? match.stage }}
     </span>
   </div>
 </template>

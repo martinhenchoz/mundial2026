@@ -4,7 +4,7 @@
       <span class="bg-red text-white text-[9px] font-bold px-1.5 py-0.5 rounded tracking-wider">
         ● EN VIVO{{ match.minute ? ` ${match.minute}'` : '' }}
       </span>
-      <span class="text-text-muted text-[10px]">{{ match.group?.replace('GROUP_','Grupo ') ?? match.stage }}</span>
+      <span class="text-text-muted text-[10px]">{{ match.group?.replace(/^(GROUP_|Group )/i, 'Grupo ') ?? match.stage }}</span>
     </div>
     <MatchScore :match="match" size="lg" />
   </div>
