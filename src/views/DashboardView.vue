@@ -1,12 +1,7 @@
 <template>
   <div class="p-4 md:p-6 space-y-6 max-w-4xl">
-    <div class="flex items-start justify-between">
-      <div>
-        <h1 class="text-text font-bold text-xl">Dashboard</h1>
-        <p class="text-text-muted text-xs mt-0.5">{{ todayStr }}</p>
-      </div>
-      <span v-if="store.liveMatches.length"
-        class="bg-red/10 border border-red/40 text-red-light text-xs font-bold px-2 py-1 rounded">
+    <div v-if="store.liveMatches.length" class="flex justify-end">
+      <span class="bg-red/10 border border-red/40 text-red-light text-xs font-bold px-2 py-1 rounded">
         ● {{ store.liveMatches.length }} EN VIVO
       </span>
     </div>
@@ -30,6 +25,7 @@
           <p v-else class="text-text-disabled text-sm">No hay partidos próximos.</p>
         </section>
       </template>
+      <PosterCarousel />
     </template>
   </div>
 </template>
@@ -38,6 +34,7 @@ import { computed, onMounted } from 'vue'
 import { useMatchesStore } from '../stores/matches'
 import { useScorersStore } from '../stores/scorers'
 import { usePolling } from '../composables/usePolling'
+import PosterCarousel from '../components/dashboard/PosterCarousel.vue'
 import CountdownCard from '../components/dashboard/CountdownCard.vue'
 import StatsGrid from '../components/dashboard/StatsGrid.vue'
 import LiveMatchCard from '../components/dashboard/LiveMatchCard.vue'
